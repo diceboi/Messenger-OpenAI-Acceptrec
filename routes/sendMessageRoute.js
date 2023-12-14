@@ -11,11 +11,11 @@ router.post('/', async (req, res) => {
     let senderId = body.senderId;
     let query = body.query;
     await setTypingOn(senderId);
-    let result = await chatCompletion(query);
-    await sendMessage(senderId, result.response);
+    let resultResponse = await chatCompletion(query);
+    await sendMessage(senderId, resultResponse);
     await setTypingOff(senderId);
     console.log(senderId);
-    console.log(result.response);
+    console.log(resultResponse);
   } catch (error) {
     console.log(error);
   }

@@ -17,7 +17,7 @@ const fbWebhookRoute = require('./routes/fbWebhookRoute');
 const sendMessageRoute = require('./routes/sendMessageRoute');
 
 webApp.use('/', homeRoute.router);
-webApp.use('/facebook', fbWebhookRoute.router);
+webApp.use('/webhook', fbWebhookRoute.router);
 webApp.use('/sendMessage', sendMessageRoute.router);
 
 webApp.listen(PORT, () => {
