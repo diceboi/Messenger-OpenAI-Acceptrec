@@ -68,6 +68,21 @@ const chatCompletion = async (prompt) => {
         headers: { 'Content-Type': 'application/json' }
       });
       console.log(response.data);
+
+      const run = await openai.beta.threads.runs.create(
+        openAiThreadId,
+        {
+          assistant_id: process.env.OPENAI_ASSISTANT_ID
+        }
+      );
+  
+      await statusCheckLoop(openAiThreadId, run.id);
+  
+      const updatedMessages = await openai.beta.threads.messages.list(openAiThreadId);
+      const content = updatedMessages.data[0].content[0].text.value;
+  
+      return content;
+
     } catch (error) {
       console.error('Error:', error);
     }
